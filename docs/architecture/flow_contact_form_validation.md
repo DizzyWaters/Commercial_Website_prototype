@@ -1,28 +1,36 @@
-# Flow: Contact Form Validation
+# Flow: Contact Form Validation Module
 
 ## Mermaid Flowchart
 
 ```mermaid
 flowchart TD
-    A[Visitor opens contact section] --> B[Visitor enters name, email, and message]
-    B --> C[Validate contact form input]
+    A[Contact Form UI Component] --> B[validateContactForm input]
+    B --> C[createContactFormValidator]
+    C --> D[ContactFormValidator]
 
-    C --> D{Are all required fields filled?}
-    D -- No --> E[Return validation errors for missing fields]
-    D -- Yes --> F{Is email format valid?}
+    D --> E[RequiredFieldStrategy: name]
+    D --> F[RequiredFieldStrategy: email]
+    D --> G[RequiredFieldStrategy: message]
+    D --> H[EmailFormatStrategy]
 
-    F -- No --> G[Return email validation error]
-    F -- Yes --> H[Return valid result]
-
-    E --> I[Display errors in UI]
+    E --> I[Validation errors array]
+    F --> I
     G --> I
-    H --> J[Allow form submission]
+    H --> I
+
+    I --> J{Are there validation errors?}
+    J -- Yes --> K[Return isValid false and errors]
+    J -- No --> L[Return isValid true and normalized value]
+
+    K --> M[UI displays validation messages]
+    L --> N[UI may continue to form submission]
 ```
 
-## Logic Notes
+## Architecture Notes
 
-* Validation must not submit data.
-* Validation must not call an API.
-* Validation must not modify UI state directly.
-* Validation should return a predictable result based only on the provided input.
-
+- The contact form UI depends on the validation module.
+- The validation module does not depend on the UI.
+- `ContactFormValidator` is the context that runs all validation strategies.
+- Each validation strategy owns one validation rule.
+- The module returns a validation result instead of causing side effects.
+- Form submission is outside the scope of this module.

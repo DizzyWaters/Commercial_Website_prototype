@@ -4,7 +4,7 @@
 
 The goal of the MVP is to create a functional first version of the product that demonstrates the core idea, supports the main user flow, and is simple enough to maintain and extend later.
 
-## Stage 1: Project Foundation
+## Stage 1: Project Foundation — Complete
 
 - Set up the repository structure.
 - Configure TypeScript and basic development tools.
@@ -16,7 +16,7 @@ The goal of the MVP is to create a functional first version of the product that 
 - Define the main user flow.
 - Identify the core MVP features.
 
-## Stage 2: Core MVP Features
+## Stage 2: Core MVP Features — In Progress
 
 - Implement the main application layout.
 - Implement the primary user-facing feature.
@@ -24,7 +24,23 @@ The goal of the MVP is to create a functional first version of the product that 
 - Add basic validation and error handling.
 - Keep the UI simple and usable.
 
-## Stage 3: Testing and Stabilization
+### Stage 2.1: Contact Form Validation Harness — Complete
+
+The contact form validation feature now has:
+
+- BDD requirements in `/docs/requirements`.
+- Mermaid architecture documentation in `/docs/architecture`.
+- A dedicated TypeScript module in `src/features/contact-validation`.
+- Business logic implemented with the Strategy design pattern.
+- Module-level documentation explaining the design pattern and component interactions.
+
+### Scope Adjustments
+
+The contact form feature is currently limited to validation logic only.
+
+The module does not send messages, call an API, store data, or connect to a backend. Submission behavior is deferred until the website has a clearer data-handling plan.
+
+## Stage 3: Testing and Stabilization — Planned
 
 - Add tests for important logic.
 - Check edge cases in the main user flow.
@@ -32,7 +48,7 @@ The goal of the MVP is to create a functional first version of the product that 
 - Improve naming, structure, and readability.
 - Remove unused or experimental code.
 
-## Stage 4: Documentation and Review
+## Stage 4: Documentation and Review — Planned
 
 - Update the README with setup and usage instructions.
 - Review `AGENTS.md` and `/docs` to make sure they match the actual project.
