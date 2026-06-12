@@ -24,23 +24,22 @@ The goal of the MVP is to create a functional first version of the product that 
 - Add basic validation and error handling.
 - Keep the UI simple and usable.
 
-### Stage 2.1: Contact Form Validation Harness — Complete
+### Completed Work
 
-The contact form validation feature now has:
-
-- BDD requirements in `/docs/requirements`.
-- Mermaid architecture documentation in `/docs/architecture`.
-- A dedicated TypeScript module in `src/features/contact-validation`.
-- Business logic implemented with the Strategy design pattern.
-- Module-level documentation explaining the design pattern and component interactions.
+- Contact form validation requirements were documented using BDD.
+- Contact form validation architecture was documented using Mermaid.
+- Contact form validation business logic was implemented as a Strategy Pattern module.
+- A spec-driven React UI was implemented for the contact form.
+- The UI now calls the existing `validateContactForm` module instead of duplicating validation logic.
 
 ### Scope Adjustments
 
-The contact form feature is currently limited to validation logic only.
+- The contact form currently validates input only.
+- The prototype does not send messages to an API, database, or email service.
+- This keeps the MVP focused on maintainable frontend integration with documented business logic.
+- Form submission behavior may be added in a future release after the validation flow is stable.
 
-The module does not send messages, call an API, store data, or connect to a backend. Submission behavior is deferred until the website has a clearer data-handling plan.
-
-## Stage 3: Testing and Stabilization — Planned
+## Stage 3: Testing and Stabilization — Not Started
 
 - Add tests for important logic.
 - Check edge cases in the main user flow.
@@ -48,7 +47,7 @@ The module does not send messages, call an API, store data, or connect to a back
 - Improve naming, structure, and readability.
 - Remove unused or experimental code.
 
-## Stage 4: Documentation and Review — Planned
+## Stage 4: Documentation and Review — In Progress
 
 - Update the README with setup and usage instructions.
 - Review `AGENTS.md` and `/docs` to make sure they match the actual project.
@@ -76,6 +75,7 @@ The following features are not required for the MVP and may be implemented later
 - Mobile application support.
 - Large-scale performance optimization.
 - Full production deployment automation.
+- Real contact form submission through an API or email service.
 
 ## Human and AI Responsibilities
 

@@ -1,36 +1,42 @@
-# Flow: Contact Form Validation Module
+# Flow: Contact Form Validation UI and Strategy Module
 
 ## Mermaid Flowchart
 
 ```mermaid
 flowchart TD
-    A[Contact Form UI Component] --> B[validateContactForm input]
-    B --> C[createContactFormValidator]
-    C --> D[ContactFormValidator]
+    A[Visitor opens commercial website homepage] --> B[ContactFormSection React component renders]
+    B --> C[Visitor enters name, email, and message]
+    C --> D[Visitor clicks Validate Contact Form]
+    D --> E[UI calls validateContactForm input]
 
-    D --> E[RequiredFieldStrategy: name]
-    D --> F[RequiredFieldStrategy: email]
-    D --> G[RequiredFieldStrategy: message]
-    D --> H[EmailFormatStrategy]
+    subgraph UI[Frontend UI Layer]
+        B
+        C
+        D
+        K[Display field errors or success message]
+    end
 
-    E --> I[Validation errors array]
-    F --> I
-    G --> I
-    H --> I
+    subgraph Module[Contact Validation Module]
+        E --> F[createContactFormValidator]
+        F --> G[ContactFormValidator]
+        G --> H[Run RequiredFieldStrategy]
+        G --> I[Run EmailFormatStrategy]
+        H --> J[Return validation result]
+        I --> J
+    end
 
-    I --> J{Are there validation errors?}
-    J -- Yes --> K[Return isValid false and errors]
-    J -- No --> L[Return isValid true and normalized value]
-
-    K --> M[UI displays validation messages]
-    L --> N[UI may continue to form submission]
+    J --> K
+    K --> L{Is form valid?}
+    L -- No --> M[Keep user on form and show accessible errors]
+    L -- Yes --> N[Show success message for prototype]
 ```
 
 ## Architecture Notes
 
-- The contact form UI depends on the validation module.
-- The validation module does not depend on the UI.
-- `ContactFormValidator` is the context that runs all validation strategies.
-- Each validation strategy owns one validation rule.
-- The module returns a validation result instead of causing side effects.
-- Form submission is outside the scope of this module.
+- `ContactFormSection` is the frontend UI component.
+- `ContactFormSection` imports `validateContactForm` from `src/features/contact-validation`.
+- The UI does not duplicate validation rules.
+- The UI does not submit data to an API in this prototype.
+- The validation module remains responsible for business logic.
+- The UI is responsible for collecting input and displaying returned errors.
+```
